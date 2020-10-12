@@ -1,0 +1,15 @@
+{% extends 'sellers/base.html' %} {% load static %} {% load crispy_forms_tags %} {% block content %}
+
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <br>
+        <h3>Modifier mon profile</h3>
+        <hr>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %} {{user_form|crispy}} {{profile_form|crispy}}
+            <button type="submit" class="btn btn-danger">sauvegarder</button>
+        </form>
+        <br>
+    </div>
+</div>
+{% endblock %}

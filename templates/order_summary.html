@@ -1,0 +1,233 @@
+{% extends 'base.html' %} {% load static %} {% load i18n %} {% block content %} {% if object %}
+<!-- 
+        BREADCRUMBS
+        =============================================== -->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <ol class="breadcrumb bg-blue">
+                <li><a href="/">Acceuil</a></li>
+                <li class="active">Mon panier</li>
+            </ol>
+
+        </div>
+    </div>
+</div>
+<!-- END: BREADCRUMBS -->
+
+<div class="container">
+    <!-- 
+            STEPS
+            =============================================== -->
+    <div class="row block none-padding-top">
+        <div class="col-xs-12">
+
+            <ul class="steps row">
+                <li class="active col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                    <div class="icon number bg-blue">
+                        1
+                    </div>
+                    <span>
+                        Confirmer
+                    </span> les produits
+
+                    <span class="dir-icon hidden-xs">
+                        <i class="icofont icofont-stylish-right text-yellow"></i>
+                    </span>
+                </li>
+
+                <li class="hidden-xs col-sm-4 col-md-4 col-lg-3">
+                    <div class="icon number bg-grey">
+                        2
+                    </div>
+                    <span>
+                                Remplisser 
+                            </span> les formulaires
+
+                    <span class="dir-icon">
+                                <i class="icofont icofont-stylish-right"></i>
+                            </span>
+                </li>
+
+                <li class="hidden-xs col-sm-4 col-md-4 col-lg-3">
+                    <div class="icon number bg-grey">
+                        3
+                    </div>
+                    <span>
+                                Confirmer
+                            </span> le payment
+
+                    <span class="dir-icon hidden-sm hidden-md">
+                                <i class="icofont icofont-stylish-right"></i>
+                            </span>
+                </li>
+
+                <li class="hidden-xs col-lg-3 hidden-sm hidden-md">
+                    <div class="icon number bg-grey">
+                        4
+                    </div>
+                    <span>
+                                Vos
+                            </span> Comandes
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- END: STEPS -->
+
+    <!-- 
+            CONTENT
+            =============================================== -->
+    <div class="row block none-padding-top">
+        <div class="col-xs-12">
+
+            <div class="product-list">
+                <div class="wrap bg-white">
+
+                    <!-- Header -->
+                    <div class="list-header text-uppercase">
+
+                        <div class="check hidden-xs hidden-sm">
+                            <div class="checkbox vers-2">
+                                <label for="checkAll">
+                                            #
+                                        </label>
+                            </div>
+                        </div>
+
+                        <div class="product">
+                            Produit
+                        </div>
+
+                        <div class="price hidden-xs hidden-sm">
+                            Prix
+                        </div>
+
+                        <div class="qnt hidden-xs hidden-sm">
+                            Quantite
+                        </div>
+
+                        <div class="total hidden-xs hidden-sm">
+                            Total
+                        </div>
+
+                        <div class="rmv hidden-xs hidden-sm">
+                            Supprimer
+                        </div>
+                    </div>
+                    <!-- / Header -->
+
+                    <!-- List body -->
+                    <div class="list-body">
+                        {% for order_item in object.items.all %}
+                        <!-- Item -->
+                        <div class="item">
+
+                            <!-- Checkbox -->
+                            <div class="check hidden-xs">
+                                <div class="checkbox vers-2">
+                                    <label for="item-check-4">
+                                      {{ forloop.counter }}
+                                            </label>
+                                </div>
+                            </div>
+
+                            <div class="product">
+                                <img src="{{ order_item.item.image.url }}" alt="">
+
+                                <span class="comp-header st-8 text-uppercase">
+                                  {{ order_item.item.title }}
+                                    <span>
+                                      {{ order_item.item.category }}
+                                    </span>
+                                </span>
+                            </div>
+                            {% if order_item.item.discount_price %}
+                            <div class="price hidden-xs">
+                                <span class="disclam hidden-sm">Saving -${{ order_item.get_amount_saved }}</span>
+                                <span class="price">
+                                          <i class="icofont icofont-cur-dollar"></i>
+                                          <span class="prc">
+                                              <span>{{ order_item.item.discount_price }}
+                              </span>
+                                </span>
+                                <span class="old hidden-xs hidden-sm">
+                                          <i class="icofont icofont-cur-dollar"></i>
+                                          <span>
+                                            {{ order_item.item.price }}
+                                          </span>
+                                </span>
+                            </div>
+                            {% else %}
+                            <div class="price hidden-xs">
+                                <span class="price">
+                                <i class="icofont icofont-cur-dollar"></i>
+                                <span class="prc">
+                                    <span>{{ order_item.item.price }}</span>
+                                </span>
+                            </div>
+                            {% endif %}
+
+                            <div class="qnt">
+                                <span>
+                                            <a href="{% url 'core:remove-single-item-from-cart' order_item.item.slug %}" class="minus" style="text-decoration: none;">
+                                                <i class="icofont icofont-minus"></i>
+                                            </a>
+                                <span class="input">
+                                    <input type="text" value="{{ order_item.quantity }}">
+                                </span>
+                                <a href="{% url 'core:add-to-cart' order_item.item.slug %}" class="plus" style="text-decoration: none;">
+                                    <i class="icofont icofont-plus"></i>
+                                </a>
+                                </span>
+                            </div>
+                            {% if order_item.item.discount_price %}
+                            <div class="total">
+                                <i class="icofont icofont-cur-dollar"></i>
+                                <span>{{ order_item.get_total_discount_item_price}}</span>
+                            </div>
+                            {% else %}
+                            <div class="total">
+                                <i class="icofont icofont-cur-dollar"></i>
+                                <span>{{ order_item.get_total_item_price}}</span>
+                            </div>
+                            {% endif %}
+
+                            <div class="rmv text-center">
+                                <a href="{% url 'core:remove-from-cart' order_item.item.slug %}" role="button" style="color: red;">
+                                    X
+                                </a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <!-- / List body -->
+
+                    <!-- Footer -->
+                    <div class="list-footer bg-blue">
+                        <a href="{% url 'core:shop' %}" class="btn btn-default btn-material">
+                            <i class="icofont icofont-cart-alt"></i>
+                            <span class="body">continue vos achats</span>
+                        </a>
+                        <a href="{% url 'core:checkout' %}" class="btn btn-material btn-yellow">
+                            <span>passer au payment</span>
+                        </a>
+                        <span class="btn btn-text-white">
+                            <span style="font-size: 20px;">Total <b>${{ object.get_total }}</b></span>
+                        </span>
+                    </div>
+                    <!-- / Footer -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: CONTENT -->
+</div>
+{% else %}
+<div class="container">
+    <div class="alert alert-danger">
+        {% trans "You do not have an active order" %}
+    </div>
+</div>
+{% endif %} {% endblock content %}

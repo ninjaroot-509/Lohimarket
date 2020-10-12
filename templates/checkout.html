@@ -1,0 +1,330 @@
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {% block content %}
+<!-- 
+        BREADCRUMBS
+        =============================================== -->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <ol class="breadcrumb bg-blue">
+                <li><a href="#">Homepage</a></li>
+                <li><a href="#">Blog category</a></li>
+                <li class="active">This item</li>
+            </ol>
+
+        </div>
+    </div>
+</div>
+<!-- END: BREADCRUMBS -->
+
+<div class="container">
+
+    <!-- 
+          STEPS
+          =============================================== -->
+    <div class="row block none-padding-top">
+        <div class="col-xs-12">
+
+            <ul class="steps row">
+                <li class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                    <div class="icon number bg-blue">
+                        1
+                    </div>
+                    <span>
+                        Confirmer
+                    </span> les produits
+
+                    <span class="dir-icon hidden-xs">
+                        <i class="icofont icofont-stylish-right"></i>
+                    </span>
+                </li>
+
+                <li class="active hidden-xs col-sm-4 col-md-4 col-lg-3">
+                    <div class="icon number bg-blue">
+                        2
+                    </div>
+                    <span>
+                                Remplisser 
+                            </span> les formulaires
+
+                    <span class="dir-icon">
+                                <i class="icofont icofont-stylish-right text-yellow"></i>
+                            </span>
+                </li>
+
+                <li class="hidden-xs col-sm-4 col-md-4 col-lg-3">
+                    <div class="icon number bg-grey">
+                        3
+                    </div>
+                    <span>
+                                Confirmer
+                            </span> le payment
+
+                    <span class="dir-icon hidden-sm hidden-md">
+                                <i class="icofont icofont-stylish-right"></i>
+                            </span>
+                </li>
+
+                <li class="hidden-xs col-lg-3 hidden-sm hidden-md">
+                    <div class="icon number bg-grey">
+                        4
+                    </div>
+                    <span>
+                                Vos
+                            </span> Comandes
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- END: STEPS -->
+
+    <!-- 
+      CONTENT
+          =============================================== -->
+    <div class="row block none-padding-top">
+
+        <div class="col-xs-12 col-md-8 col-lg-9 get-height">
+            <div class="sdw-block">
+                <div class="wrap bg-white">
+
+                    {% if request.user.is_authenticated %} {% else %}
+                    <!-- Authirize form -->
+                    <div class="row auth-form">
+
+                        <!-- Header & nav -->
+                        <div class="col-md-12">
+
+                            <!-- Header -->
+                            <h1 class="header text-uppercase">
+                                Authirization
+                                <span>
+                                          required
+                                      </span>
+                            </h1>
+
+                        </div>
+
+                        <div class="col-md-4">
+                            <!-- Text -->
+                            <span class="text">
+                                      Magni labore ratione maiores, laborum quaerat molestiae excepturi. Corporis, necessitatibus earum.
+                                  </span>
+
+                            <!-- Nav -->
+                            <div class="asside-nav no-bg">
+                                <ul class="nav-vrt border">
+                                    <li class="active">
+                                        <a href="#" class="btn-material">Privacy policy</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="btn-material">Terms and conditions</a>
+                                    </li>
+
+                                    <li>
+                                        <a href="#" class="btn-material">FAQ</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 col-md-offset-1">
+                            <form>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail2">Email address</label>
+                                    <input type="email" class="form-control" id="exampleInputEmail2" placeholder="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword2">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword2" placeholder="Password">
+                                </div>
+                                <div class="checkbox padding">
+                                    <input type="checkbox" id="inputCheckBox2">
+                                    <label for="inputCheckBox2">
+                                              <span class="checkbox-input">
+                                                  <span class="off">off</span>
+                                                  <span class="on">on</span>
+                                              </span>
+                                              remember password
+                                          </label>
+                                </div>
+
+                                <span class="sdw-wrap">
+                                          <button type="submit" class="sdw-hover btn btn-material btn-yellow btn-lg ripple-cont">Login</button>
+                                          <span class="sdw"></span>
+                                </span>
+
+                                <ul class="addon-login-btn">
+                                    <li>
+                                        <a href="#">register</a>
+                                    </li>
+                                    <li>or</li>
+                                    <li>
+                                        <a href="#">restore password</a>
+                                    </li>
+                                </ul>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- / Authirize form -->
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-xs-12">
+
+                            <div class="panel-group" id="accordion">
+
+                                <!-- <div class="panel panel-default">
+                                    <div class="panel-heading" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                <span class="panel-indicator"></span> Use addres from your profile
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            <form class="form-horizontal">
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-3 control-label pd-none">Shipping address:</label>
+                                                    <div class="col-sm-9">
+                                                        <span class="text">
+                                                                  12A Questen, Mt Vernon, NY 10550, US
+                                                              </span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-3 col-sm-7">
+                                                        <a href="#" class="sdw-hover btn btn-material btn-yellow ripple-cont">Accept</a>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div> -->
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" id="headingTwo">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                                                <span class="panel-indicator"></span> Remplisser le formulaire
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse in">
+                                        {% if DISPLAY_COUPON_FORM %}
+                                        <!-- Authirize form -->
+                                        <div class="row auth-form">
+
+                                            <!-- Header & nav -->
+                                            <div class="col-md-12">
+
+                                                <!-- Header -->
+                                                <h1 class="header text-uppercase">
+                                                    Do you have a
+                                                    <span>
+                                                            promotional code?
+                                                        </span>
+                                                </h1>
+                                            </div>
+                                            <form method="POST" action="{% url 'core:add-coupon' %}" class="card p-2">
+                                                {% csrf_token %}
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        {{ couponform.code }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <button type="submit" class="sdw-hover btn btn-material btn-primary ripple-cont">
+                                                <span class="body">Activate promo code </span>
+                                                <i class="icon icofont icofont-check-circled"></i>
+                                                </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <!-- / Authirize form -->
+                                        {% endif %}
+                                        <div class="panel-body">
+
+                                            <form class="form-horizontal" method="POST" novalidate>
+                                                {% csrf_token %}
+                                                <!-- Authocompille -->
+                                                <div class="form-group pd-bottom">
+                                                    <label for="autocomplete" class="col-sm-2 control-label">Addresse</label>
+                                                    <div class="col-sm-5">
+                                                        {{ form.quartier_addresse }}
+                                                    </div>
+                                                    <div class="col-sm-5">
+                                                        {{ form.apartment_addresse }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group pd-none">
+                                                    <label for="locality" class="col-sm-3 control-label text-darkness">Ville</label>
+                                                    <div class="col-sm-8">
+                                                        {{ form.city }}
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="form-group pd-none">
+                                                    <label for="postal_coEntrer votre addressede" class="col-sm-3 control-label text-darkness">Code Postal</label>
+                                                    <div class="col-sm-8">
+                                                        {{ form.zip }}
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group pd-none">
+                                                    <label for="country" class="col-sm-3 control-label text-darkness">Pays</label>
+                                                    <div class="col-sm-8">
+                                                        {{ form.pays }}
+                                                    </div>
+                                                </div>
+                                                <!-- / Authocompille -->
+
+                                                <div class="form-group">
+                                                    <label for="deliveryComp" class="col-sm-3 control-label text-darkness">Choisissez votre moyen de payment</label> {% for value, name in form.fields.payment_option.choices %}
+                                                    <div class="col-sm-8">
+                                                        <label class="custom-control-label" for="{{name}}">{{ name }}</label>
+                                                        <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
+                                                    </div>
+                                                    {% endfor %}
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-3 col-sm-8">
+                                                        <span class="sdw-wrap">
+                                                                  <a href="{% url 'core:home' %}" class="sdw-hover btn btn-material btn-red btn-lg ripple-cont">Annuler</a>
+                                                                  <button type="submit" class="sdw-hover btn btn-material btn-yellow btn-lg ripple-cont">Continue</button>
+                                                                  <span class="sdw"></span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4 col-lg-3 fix-height asside hidden-xs hidden-sm">
+            <div class="product-list float-block">
+                <div class="wrap bg-white">
+
+                    {% include 'order_snippet.html' %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: CONTENT -->
+
+</div>
+{% endblock content %}

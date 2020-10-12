@@ -1,0 +1,164 @@
+{% extends 'base.html' %} {% load static %} {% load crispy_forms_tags %} {% block content %}
+
+<!-- 
+        BREADCRUMBS
+        =============================================== -->
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <ol class="breadcrumb bg-blue">
+                <li><a href="#">Acceuil</a></li>
+                <li><a href="#">Blog category</a></li>
+                <li class="active">This item</li>
+            </ol>
+
+        </div>
+    </div>
+</div>
+<!-- END: BREADCRUMBS -->
+
+<div class="container">
+
+    <!-- 
+          STEPS
+          =============================================== -->
+    <div class="row block none-padding-top">
+        <div class="col-xs-12">
+
+            <ul class="steps row">
+                <li class="col-xs-12 col-sm-4 col-md-4 col-lg-3">
+                    <div class="icon number bg-blue">
+                        1
+                    </div>
+                    <span>
+                        Confirmer
+                    </span> les produits
+
+                    <span class="dir-icon hidden-xs">
+                        <i class="icofont icofont-stylish-right"></i>
+                    </span>
+                </li>
+
+                <li class="hidden-xs col-sm-4 col-md-4 col-lg-3">
+                    <div class="icon number bg-blue">
+                        2
+                    </div>
+                    <span>
+                                Remplisser 
+                            </span> les formulaires
+
+                    <span class="dir-icon">
+                                <i class="icofont icofont-stylish-right"></i>
+                            </span>
+                </li>
+
+                <li class="active hidden-xs col-sm-4 col-md-4 col-lg-3">
+                    <div class="icon number bg-blue">
+                        3
+                    </div>
+                    <span>
+                                Confirmer
+                            </span> le payment
+
+                    <span class="dir-icon hidden-sm hidden-md">
+                                <i class="icofont icofont-stylish-right text-yellow"></i>
+                            </span>
+                </li>
+
+                <li class="hidden-xs col-lg-3 hidden-sm hidden-md">
+                    <div class="icon number bg-grey">
+                        4
+                    </div>
+                    <span>
+                                Vos
+                            </span> Comandes
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- END: STEPS -->
+
+    <!-- 
+          CONTENT
+          =============================================== -->
+    <div class="row block none-padding-top">
+
+        <div class="col-xs-12 col-md-8 col-lg-9 get-height">
+            <div class="sdw-block">
+                <div class="wrap bg-white">
+                    {% if DISPLAY_COUPON_FORM %}
+                    <!-- Authirize form -->
+                    <div class="row auth-form">
+
+                        <!-- Header & nav -->
+                        <div class="col-md-12">
+
+                            <!-- Header -->
+                            <h1 class="header text-uppercase">
+                                Do you have a
+                                <span>
+                                          promotional code?
+                                      </span>
+                            </h1>
+                        </div>
+                        <form method="POST" action="{% url 'core:add-coupon' %}" class="card p-2">
+                            {% csrf_token %}
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    {{ couponform.code }}
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <button type="submit" class="sdw-hover btn btn-material btn-primary ripple-cont">
+                              <span class="body">Activate promo code </span>
+                              <i class="icon icofont icofont-check-circled"></i>
+                            </button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- / Authirize form -->
+                    {% endif %}
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="panel-group" id="accordion">
+
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" id="headingPayPall">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#payPall">
+                                                <span class="panel-indicator"></span> PayPal account
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="payPall" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <div class="form-group">
+                                                {{ form.render }}
+                                                <div class="col-sm-offset-3 col-sm-7">
+                                                    <a href="#" class="sdw-hover btn btn-material btn-yellow ripple-cont">Annuler</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-md-4 col-lg-3 fix-height asside hidden-xs hidden-sm">
+            <div class="product-list float-block">
+                <div class="wrap bg-white">
+                    {% include 'order_snippet.html' %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: CONTENT -->
+</div>
+{% endblock content %}

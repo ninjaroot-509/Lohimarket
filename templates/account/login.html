@@ -1,0 +1,92 @@
+{% load static %} {% load i18n %} {% load account socialaccount %} {% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Lohipam | {% trans "Sign In" %}</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="{% static 'vendors/iconfonts/mdi/css/materialdesignicons.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/iconfonts/ionicons/css/ionicons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/iconfonts/typicons/src/font/typicons.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/iconfonts/flag-icon-css/css/flag-icon.min.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.base.css' %}">
+    <link rel="stylesheet" href="{% static 'vendors/css/vendor.bundle.addons.css' %}">
+    <!-- endinject -->
+    <!-- plugin css for this page -->
+    <link rel="stylesheet" href="{% static 'vendors/iconfonts/font-awesome/css/font-awesome.min.css' %}" />
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="{% static 'css/shared/style.css' %}">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" />
+</head>
+
+<body>
+    <div class="container-scroller">
+        <div class="container-fluid page-body-wrapper full-page-wrapper">
+            <div class="content-wrapper d-flex align-items-center auth auth-bg-1 theme-one">
+                <div class="row w-100">
+                    <div class="col-lg-4 mx-auto">
+                        <h2 class="text-center mb-4" style="color: white">{% trans "Sign In" %}</h2>
+                        <div class="auto-form-wrapper">
+                            <form method="POST" action="{% url 'account_login' %}">
+
+                                {% csrf_token %} {% get_providers as socialaccount_providers %} {% if socialaccount_providers %}
+
+                                <div class="socialaccount_ballot">
+
+                                    <div class="form-group">
+                                        {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+                                    </div>
+
+
+                                </div>
+
+                                {% include "socialaccount/snippets/login_extra.html" %} {% else %} {% endif %}{{ form|crispy }} {% if redirect_field_value %}
+                                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" /> {% endif %}
+                                <div class="form-group">
+                                    <button class="btn btn-primary submit-btn btn-block">{% trans "Sign In" %}</button>
+                                </div>
+
+
+                                <div class="text-block text-center my-3">
+                                    <span class="text-small font-weight-semibold">{% blocktrans %} Not a member? {% endblocktrans %}</span>
+                                    <a href="{% url 'account_signup' %}" class="text-black text-small">{% blocktrans %}Create new account{% endblocktrans %}</a>
+                                </div>
+                            </form>
+                        </div>
+                        <ul class="auth-footer">
+                            <li>
+                                <a href="#">Conditions</a>
+                            </li>
+                            <li>
+                                <a href="#">{% trans "Help" %}</a>
+                            </li>
+                            <li>
+                                <a href="#">Terms</a>
+                            </li>
+                        </ul>
+                        <p class="footer-text text-center">{% blocktrans %} copyright © 2020 ninjaroot. All rights reserved.{% endblocktrans %}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- content-wrapper ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="{% static 'vendors/js/vendor.bundle.base.js' %}"></script>
+    <script src="{% static 'vendors/js/vendor.bundle.addons.js' %}"></script>
+    <!-- endinject -->
+    <!-- inject:js -->
+    <script src="{% static 'js/shared/off-canvas.js' %}"></script>
+    <script src="{% static 'js/shared/misc.js' %}"></script>
+    <!-- endinject -->
+</body>
+
+</html>
